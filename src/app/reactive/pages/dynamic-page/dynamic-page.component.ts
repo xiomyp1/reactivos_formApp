@@ -7,7 +7,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
   styles: [
   ]
 })
-export class DynamicPageComponent implements OnInit {
+export class DynamicPageComponent {
 
   //public myForm2  = new FormGroup({
   //  favoriteGames: new FormArray([])
@@ -78,15 +78,14 @@ export class DynamicPageComponent implements OnInit {
     && formArray.controls[index].touched;
   }
 
-  ngOnInit(): void {
-  }
-
   onSubmit(): void{
     if(this.myForm.invalid){
       this.myForm.markAllAsTouched();
       return;
     }
     console.log(this.myForm.value);
+    //Pero lo que podemos hacer es envolver esto entre paréntesis y decirle que lo trate como a haz un formarray, porque eso es lo que es literalmente. Yo sé que eso es un array y eso va a ser igual a
+    (this.myForm.controls['favoriteGames'] as FormArray) = this.fb.array([]);
     this.myForm.reset();
   }
 
